@@ -34,6 +34,26 @@ class Linkedlist{
         }
     }
 
+     // finding the first, middle and last node of the linkedlist
+    node *FirstNode(){
+        return head;
+    }
+
+    node *randomNode(int pos){
+        node* temp = head;
+
+        if(pos>=1 && pos<=2000){
+            for(int i =0; i<pos; i++){
+                temp = temp->next;
+            }
+            return temp;
+        }
+    }
+
+    node *EndNode(){
+        return tail;
+    }
+    
 };
 
 int main(){
@@ -50,4 +70,21 @@ int main(){
         l->createLL(rand());
     }
 
+
+     auto start1 = std::chrono::high_resolution_clock::now();
+    l->FirstNode();
+    auto end1 = std::chrono::high_resolution_clock::now();
+    std::cout << "Code running time for accessing 1st node is = " << std::chrono::duration<double, std::milli>(end1 -start1).count()<<" ms." << std::endl;
+
+    auto start2 = std::chrono::high_resolution_clock::now();
+    l->randomNode(890);
+    auto end2 = std::chrono::high_resolution_clock::now();
+    std::cout << "Code running time for finding randomly chosen node is = " << std::chrono::duration<double, std::milli>(end2 -start2).count()<<" ms." << std::endl;
+
+    auto start3 = std::chrono::high_resolution_clock::now();;
+    l->EndNode();
+    auto end3 = std::chrono::high_resolution_clock::now();
+    std::cout << "Code running time for accessing last node is = " << std::chrono::duration<double, std::milli>(end3 -start3).count()<<" ms." << std::endl;
 }
+
+
