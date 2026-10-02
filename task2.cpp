@@ -57,9 +57,9 @@ class Linkedlist{
 
 int main(){
 
-    time_t currentTime = time(nullptr);
+    std::clock_t start = clock();
 
-    std::cout << "Time before creation of linkedlist: " << ctime(&currentTime);
+    std::cout << "Time before creation of linkedlist: " << start;
 
     // seeding the srand
     srand(time(NULL));
@@ -68,8 +68,12 @@ int main(){
 
     // create a loop to make a linkedlist with 1000 nodes
     // the data for these would be random numbers
-    for(int i =1 ; i<=100; i++){
+    for(int i =1 ; i<=1000000; i++){
         l->createLL(rand());
     }
+
+    std::clock_t end = clock();
+
+    std::cout << "Time after creation of linkedlist: " << end;
 
 }
