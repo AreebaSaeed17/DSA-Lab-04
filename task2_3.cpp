@@ -1,6 +1,8 @@
 #include<iostream>
 #include<cstdlib>
 #include<ctime>
+#include<iomanip>
+#include<chrono>
 
 class Linkedlist{
     public:
@@ -19,15 +21,15 @@ class Linkedlist{
     // create a linkedlist by adding stuff to the head
     void createLL(int data){
         node* n1 = new node(data);
+
         if (head == nullptr){
             head = n1;
-            n1->next = nullptr;
             tail = n1;
         }
+
         else{
-            head->next = n1;
-            n1->next = nullptr;
-            tail = n1;
+            tail->next = n1;
+            n1->next = nullptr;tail = n1;
         }
     }
 
@@ -41,7 +43,7 @@ class Linkedlist{
         node *slow = head;
         
         // by the end of this loop, slow ptr will be at the middle and the fast ptr will be at null 
-        while(fast->next!=nullptr){
+        while(fast!=nullptr && fast->next!=nullptr){
             fast = fast->next->next;
             slow = slow->next;
         }
@@ -57,10 +59,6 @@ class Linkedlist{
 
 int main(){
 
-    std::clock_t start = clock();
-
-    std::cout << "Time before creation of linkedlist: " << start << std::endl;
-
     // seeding the srand
     srand(time(NULL));
 
@@ -68,15 +66,23 @@ int main(){
 
     // create a loop to make a linkedlist with 1000 nodes
     // the data for these would be random numbers
-    std::cout<<"_____________Creating the Linkedlist_____________\n";
-    for(int i =1 ; i<=1000000; i++){ 
+    std::cout<<"_____________Creating the Linkedlist with 100000 nodes_____________\n";
+    for(int i =1 ; i<=100000; i++){ 
         l->createLL(rand());
     }
 
-    std::clock_t end = clock();
+    auto start1 = std::chrono::high_resolution_clock::now();
+    l->FirstNode();
+    auto end1 = std::chrono::high_resolution_clock::now();
+    std::cout << "Code running time for finding 1st node is = " << std::chrono::duration(end1 -start1).count()<<" ms." << std::endl;
 
-    std::cout << "Time after creation of linkedlist: " << end << std::endl;
+    auto start2 = std::chrono::high_resolution_clock::now();
+    l->MiddleNode();
+    auto end2 = std::chrono::high_resolution_clock::now();
+    std::cout << "Code running time for finding middle node is = " << std::chrono::duration(end2 -start2).count()<<" ms." << std::endl;
 
-    std::cout << "Code running time is = " <<(end - start) *1000 <<" ms." << std::endl;
-
+    auto start3 = std::chrono::high_resolution_clock::now();;
+    l->EndNode();
+    auto end3 = std::chrono::high_resolution_clock::now();
+    std::cout << "Code running time for finding last node is = " << std::chrono::duration(end3 -start3).count()<<" ms." << std::endl;
 }
