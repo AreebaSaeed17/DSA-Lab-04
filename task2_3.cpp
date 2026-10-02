@@ -74,7 +74,7 @@ int main(){
     auto start1 = std::chrono::high_resolution_clock::now();
     l->FirstNode();
     auto end1 = std::chrono::high_resolution_clock::now();
-    std::cout << "Code running time for finding 1st node is = " << std::chrono::duratiGon<double, std::milli>(end1 -start1).count()<<" ms." << std::endl;
+    std::cout << "Code running time for finding 1st node is = " << std::chrono::duration<double, std::milli>(end1 -start1).count()<<" ms." << std::endl;
 
     auto start2 = std::chrono::high_resolution_clock::now();
     l->MiddleNode();
