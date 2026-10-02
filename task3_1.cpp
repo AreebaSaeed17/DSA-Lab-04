@@ -39,15 +39,29 @@ class Linkedlist{
         return head;
     }
 
-    node *randomNode(int pos){
-        node* temp = head;
+    int countNodes(){
 
-        if(pos>=1 && pos<=2000){
-            for(int i =0; i<pos; i++){
-                temp = temp->next;
-            }
-            return temp;
+        int num = 0;
+        node * count = head;
+        while(count!= nullptr){    
+            num++;
+            count = count->next;
         }
+        return num;
+    }
+
+    node* findNode_Pos_by_value(int data){
+        
+        int size_LL = countNodes();
+        node * temp_find = head;
+        int pos = 0;
+
+        for (int i=0; i<size_LL; i++){
+            if (temp_find->data == data){
+            }
+        return temp_find;
+        }
+
     }
 
     node *EndNode(){
@@ -77,7 +91,7 @@ int main(){
     std::cout << "Code running time for accessing 1st node is = " << std::chrono::duration<double, std::milli>(end1 -start1).count()<<" ms." << std::endl;
 
     auto start2 = std::chrono::high_resolution_clock::now();
-    l->randomNode(890);
+    l->findNode_Pos_by_value(5678);
     auto end2 = std::chrono::high_resolution_clock::now();
     std::cout << "Code running time for finding randomly chosen node is = " << std::chrono::duration<double, std::milli>(end2 -start2).count()<<" ms." << std::endl;
 
