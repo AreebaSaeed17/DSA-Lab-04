@@ -37,26 +37,47 @@ class Linkedlist{
         }
     }
 
-    // delete the last node
+    
+    int countNodes(){
 
-    void delete_LastNode(){
-        node *temp = head;
-        node *hold = temp;
-
-        while(temp->next->next!= nullptr){
-            temp = temp->next;
+        int num = 0;
+        node * count = head;
+        while(count!= nullptr){    
+            num++;
+            count = count->next;
         }
-        // reached 2nd last node
-        // hold link for last node
-        hold = temp->next;
-        delete hold;
-        temp->next = nullptr;
+        return num;
     }
 
-    
+   
 
-    
-    
+        void deleteNode_byPos(int pos) {
+        int size = countNodes(); 
+
+        if (pos < 0 || pos >= size || head == nullptr) {
+            return;
+        }
+
+        // if head has to be deleted
+        if (pos == 0) {
+            node *temp = head;
+            head = head->next;
+            delete temp;
+            return;
+        }
+
+        // delete any specific node
+        node *prev = head;
+        for (int i = 0; i < pos - 1; i++) {
+            prev = prev->next;
+        }
+
+        node *temp = prev->next;
+        prev->next = temp->next;
+        delete temp;
+    }
+
+
 };
 
 int main(){
