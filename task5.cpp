@@ -156,7 +156,7 @@ public:
     }
 
     // InsertBefore
-    void op_insertBefore(node* curr, int val) {
+    void insertBefore(node* curr, int val) {
         if (curr == nullptr){ 
             return;  }
         node* newNode = new node(val);
@@ -185,22 +185,24 @@ public:
     }
 };
 
-    // main body
+
+// main body
 int main() {
+
     srand(time(NULL));
 
     SinglyLinkedList sll;
     DoublyLinkedList dll;
     int numNodes = 50000;
 
-    // Populating lists with identical random data
+    // giving both the lists identical random data
     for (int i = 0; i < numNodes; i++) {
         int val = rand();
         sll.insertEnd(val);
         dll.insertEnd(val);
     }
 
-    // Pick a target node in the middle (position 25,000)
+    // Pick a target node in the middle 
     int targetIndex = 25000;
     SinglyLinkedList::node* sll_curr = sll.head;
     DoublyLinkedList::node* dll_curr = dll.head;
@@ -212,63 +214,63 @@ int main() {
 
     cout << fixed << setprecision(6);
     cout << "=========================================================\n";
-    cout << " BENCHMARK RESULTS (N = " << numNodes << " nodes)\n";
+    cout << " (N = " << numNodes << " nodes)\n";
     cout << " Target: Node at position " << targetIndex << "\n";
     cout << "=========================================================\n\n";
 
-    // --- SINGLY LINKED LIST TIMINGS ---
+    // recording time for running of code for singly ll
     auto start = high_resolution_clock::now();
-    sll.Next(sll_curr);
+    sll.next(sll_curr);
     auto end = high_resolution_clock::now();
     double sll_next_time = duration<double, milli>(end - start).count();
 
     start = high_resolution_clock::now();
-    sll.op_previous(sll_curr);
+    sll.previous(sll_curr);
     end = high_resolution_clock::now();
     double sll_prev_time = duration<double, milli>(end - start).count();
 
     start = high_resolution_clock::now();
-    sll.op_insertAfter(sll_curr, 9999);
+    sll.insertAfter(sll_curr, 9999);
     end = high_resolution_clock::now();
     double sll_insertAfter_time = duration<double, milli>(end - start).count();
 
     start = high_resolution_clock::now();
-    sll.op_insertBefore(sll_curr, 8888);
+    sll.insertBefore(sll_curr, 8888);
     end = high_resolution_clock::now();
     double sll_insertBefore_time = duration<double, milli>(end - start).count();
 
     start = high_resolution_clock::now();
-    sll.op_delete(sll_curr);
+    sll.Delete_node(sll_curr);
     end = high_resolution_clock::now();
     double sll_delete_time = duration<double, milli>(end - start).count();
 
-    // --- DOUBLY LINKED LIST TIMINGS ---
+    // timings for doubly linkedlist
     start = high_resolution_clock::now();
-    dll.op_next(dll_curr);
+    dll.next(dll_curr);
     end = high_resolution_clock::now();
     double dll_next_time = duration<double, milli>(end - start).count();
 
     start = high_resolution_clock::now();
-    dll.op_previous(dll_curr);
+    dll.previous(dll_curr);
     end = high_resolution_clock::now();
     double dll_prev_time = duration<double, milli>(end - start).count();
 
     start = high_resolution_clock::now();
-    dll.op_insertAfter(dll_curr, 9999);
+    dll.insertAfter(dll_curr, 9999);
     end = high_resolution_clock::now();
     double dll_insertAfter_time = duration<double, milli>(end - start).count();
 
     start = high_resolution_clock::now();
-    dll.op_insertBefore(dll_curr, 8888);
+    dll.insertBefore(dll_curr, 8888);
     end = high_resolution_clock::now();
     double dll_insertBefore_time = duration<double, milli>(end - start).count();
 
     start = high_resolution_clock::now();
-    dll.op_delete(dll_curr);
+    dll.Delete_node(dll_curr);
     end = high_resolution_clock::now();
     double dll_delete_time = duration<double, milli>(end - start).count();
 
-    // Print comparative timings
+    // comparison of timings upto 15 digits
     cout << left << setw(15) << "Operation" 
          << setw(25) << "SinglyLinkedList (ms)" 
          << setw(25) << "DoublyLinkedList (ms)" << endl;
