@@ -109,7 +109,7 @@ int main(){
 
     std::cout << "_____________Creating the Linkedlist with 4000000 nodes_____________\n";
     auto start1 = std::chrono::high_resolution_clock::now();
-    for(int i = 1; i <= 4000; i++){ 
+    for(int i = 1; i <= 4000000; i++){ 
         l->createLL(rand());
     }
     auto end1 = std::chrono::high_resolution_clock::now();
