@@ -124,7 +124,7 @@ int main(){
     l->deleteNode_byPos(3800);
     
     auto end_pos = std::chrono::high_resolution_clock::now();
-    std::cout << "Time for deleting node by passing position: " 
+    std::cout << "Time for deleting node by passing position (using only head ptr): " 
               << std::chrono::duration<double, std::milli>(end_pos - start_pos).count() << " ms.\n\n";
 
 
@@ -140,7 +140,7 @@ int main(){
     l->deleteNode_byPointers(prevPtr, currPtr);
 
     auto end2 = std::chrono::high_resolution_clock::now();
-    std::cout << "Time for deleteNode_byPointers: " 
+    std::cout << "Time for deleting node using 2 pointers: " 
               << std::chrono::duration<double, std::milli>(end2 - start2).count() << " ms.\n";
     }
 
