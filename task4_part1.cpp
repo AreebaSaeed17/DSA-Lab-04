@@ -24,18 +24,14 @@ class Linkedlist{
 
         if (head == nullptr){
             head = n1;
-        }
-
-        else{
+        } else {
             node *temp = head;
-            while(temp->next!=nullptr){
-                temp->next = n1;
-                n1->next = nullptr;
+            while(temp->next != nullptr){
                 temp = temp->next;
             }
-
+            temp->next = n1; // Attach at the end of the list
         }
-    }
+}
 
     
     int countNodes(){
@@ -51,8 +47,9 @@ class Linkedlist{
 
    
 
+    // this method deletes node by only using head ptr 
     void deleteNode_byPos(int pos) {
-        int size = countNodes(); // Requires O(N) traversal
+        int size = countNodes();
             if (pos < 0 || pos >= size || head == nullptr) return;
 
             // edge case deleting the head node
@@ -74,30 +71,78 @@ class Linkedlist{
             delete temp;
         }
 
+    void deleteNode_byPointers(node *prev, node *curr) {
+        if (curr == nullptr) return;
+
+        // deleting the head node
+        if (prev == nullptr) {
+            head = curr->next;
+        } else {
+            prev->next = curr->next;
+        }
+
+        delete curr;
+    }
+
+    // helper function for deleting nodes with 2 ptrs available
+    bool findPointers(int targetValue, node* &prev, node* &curr) {
+        prev = nullptr;
+        curr = head;
+
+        while (curr != nullptr && curr->data != targetValue) {
+            prev = curr;
+            curr = curr->next;
+        }
+
+        // Returns true if the node was found in the list
+        return (curr != nullptr);
+    }
+
 };
 
 int main(){
-
-     // seeding the srand
+    // seeding the rand
     srand(time(NULL));
 
+    // object of linkedlist class
     Linkedlist *l = new Linkedlist();
 
-    // create a loop to make a linkedlist with 40 nodes
-    // the data for these would be random numbers
-
+    std::cout << "_____________Creating the Linkedlist with 40 nodes_____________\n";
     auto start1 = std::chrono::high_resolution_clock::now();
-    std::cout<<"_____________Creating the Linkedlist with 40 nodes_____________\n";
-    for(int i =1 ; i<=40; i++){ 
+    for(int i = 1; i <= 40; i++){ 
         l->createLL(rand());
     }
     auto end1 = std::chrono::high_resolution_clock::now();
-    std::cout << "Code running time for creating the linkedlist with 40 nodes is = " << std::chrono::duration<double, std::milli>(end1 -start1).count()<<" ms." << std::endl;
+    std::cout << "Code running time for creating the linkedlist with 40 nodes is = " 
+              << std::chrono::duration<double, std::milli>(end1 - start1).count() << " ms.\n\n";
 
-
-    // deleting a node by passing its position
+   
+    // part 1: Delete node by passing position index
+  
+    auto start_pos = std::chrono::high_resolution_clock::now();
+    
     l->deleteNode_byPos(38);
-}
+    
+    auto end_pos = std::chrono::high_resolution_clock::now();
+    std::cout << "Time for deleting node by passing position: " 
+              << std::chrono::duration<double, std::milli>(end_pos - start_pos).count() << " ms.\n\n";
 
+
+    // part b: deleting node by 2 ptrs by passing its value
+
+    int targetVal = 12345;
+    Linkedlist::node *prevPtr = nullptr;
+    Linkedlist::node *currPtr = nullptr;
+
+    auto start2 = std::chrono::high_resolution_clock::now();
+    
+    if (l->findPointers(targetVal, prevPtr, currPtr)) {
+    l->deleteNode_byPointers(prevPtr, currPtr);
+
+    auto end2 = std::chrono::high_resolution_clock::now();
+    std::cout << "Time for deleteNode_byPointers: " 
+              << std::chrono::duration<double, std::milli>(end2 - start2).count() << " ms.\n";
+}
+}
 
 
