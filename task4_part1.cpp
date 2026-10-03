@@ -113,7 +113,7 @@ int main(){
         l->createLL(rand());
     }
     auto end1 = std::chrono::high_resolution_clock::now();
-    std::cout << "Code running time for creating the linkedlist with 40 nodes is = " 
+    std::cout << "Code running time for creating the linkedlist with 4000000 nodes is = " 
               << std::chrono::duration<double, std::milli>(end1 - start1).count() << " ms.\n\n";
 
    
@@ -121,7 +121,7 @@ int main(){
   
     auto start_pos = std::chrono::high_resolution_clock::now();
     
-    l->deleteNode_byPos(38);
+    l->deleteNode_byPos(3800);
     
     auto end_pos = std::chrono::high_resolution_clock::now();
     std::cout << "Time for deleting node by passing position: " 
@@ -130,7 +130,7 @@ int main(){
 
     // part b: deleting node by 2 ptrs by passing its value
 
-    int targetVal = 12345;
+    int targetVal = 12345;          // randomly assumed value
     Linkedlist::node *prevPtr = nullptr;
     Linkedlist::node *currPtr = nullptr;
 
