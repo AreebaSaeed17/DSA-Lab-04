@@ -107,9 +107,9 @@ int main(){
     // object of linkedlist class
     Linkedlist *l = new Linkedlist();
 
-    std::cout << "_____________Creating the Linkedlist with 40 nodes_____________\n";
+    std::cout << "_____________Creating the Linkedlist with 4000000 nodes_____________\n";
     auto start1 = std::chrono::high_resolution_clock::now();
-    for(int i = 1; i <= 40; i++){ 
+    for(int i = 1; i <= 4000; i++){ 
         l->createLL(rand());
     }
     auto end1 = std::chrono::high_resolution_clock::now();
@@ -135,14 +135,23 @@ int main(){
     Linkedlist::node *currPtr = nullptr;
 
     auto start2 = std::chrono::high_resolution_clock::now();
-    
+
     if (l->findPointers(targetVal, prevPtr, currPtr)) {
     l->deleteNode_byPointers(prevPtr, currPtr);
 
     auto end2 = std::chrono::high_resolution_clock::now();
     std::cout << "Time for deleteNode_byPointers: " 
               << std::chrono::duration<double, std::milli>(end2 - start2).count() << " ms.\n";
-}
+    }
+
+    else{
+        auto start3 = std::chrono::high_resolution_clock::now();
+        std::cout<<"This value wasnt found in any of the linked list nodes.\n";
+        auto end3 = std::chrono::high_resolution_clock::now();
+        std::cout << "Time spent: " 
+              << std::chrono::duration<double, std::milli>(end3 - start3).count() << " ms.\n";
+    }
+
 }
 
 
