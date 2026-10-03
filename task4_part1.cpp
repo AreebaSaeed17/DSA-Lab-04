@@ -51,32 +51,28 @@ class Linkedlist{
 
    
 
-        void deleteNode_byPos(int pos) {
-        int size = countNodes(); 
+    void deleteNode_byPos(int pos) {
+        int size = countNodes(); // Requires O(N) traversal
+            if (pos < 0 || pos >= size || head == nullptr) return;
 
-        if (pos < 0 || pos >= size || head == nullptr) {
-            return;
-        }
+            // edge case deleting the head node
+            if (pos == 0) {
+                    node *temp = head;
+                    head = head->next;
+                    delete temp;
+                    return;
+            }
 
-        // if head has to be deleted
-        if (pos == 0) {
-            node *temp = head;
-            head = head->next;
+            // Traverse to the node right before the target node (pos - 1)
+            node *prev = head;
+            for (int i = 0; i < pos - 1; i++) {
+                prev = prev->next;
+            }
+
+            node *temp = prev->next;
+            prev->next = temp->next;
             delete temp;
-            return;
         }
-
-        // delete any specific node
-        node *prev = head;
-        for (int i = 0; i < pos - 1; i++) {
-            prev = prev->next;
-        }
-
-        node *temp = prev->next;
-        prev->next = temp->next;
-        delete temp;
-    }
-
 
 };
 
@@ -89,10 +85,18 @@ int main(){
 
     // create a loop to make a linkedlist with 40 nodes
     // the data for these would be random numbers
+
+    auto start1 = std::chrono::high_resolution_clock::now();
     std::cout<<"_____________Creating the Linkedlist with 40 nodes_____________\n";
     for(int i =1 ; i<=40; i++){ 
         l->createLL(rand());
     }
+    auto end1 = std::chrono::high_resolution_clock::now();
+    std::cout << "Code running time for creating the linkedlist with 40 nodes is = " << std::chrono::duration<double, std::milli>(end1 -start1).count()<<" ms." << std::endl;
+
+
+    // deleting a node by passing its position
+    l->deleteNode_byPos(38);
 }
 
 
